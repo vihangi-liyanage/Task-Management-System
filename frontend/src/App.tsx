@@ -105,17 +105,13 @@ export default function App() {
     return (
       <main className="app-shell login-layout">
         <section className="hero-card login-copy">
-          <p className="eyebrow">Koncepthive assessment</p>
-          <h1>Task management, built with a clean foundation.</h1>
-          <p className="lead">
-            Login with the provided admin credentials to access the protected dashboard.
+          <p className="eyebrow">Task Management System</p>
+          <h1>Manage Your Tasks. Achieve Your Goals.</h1>
+          <p className="lead hero-copy">
+            Stay organized, focused, and productive with a simple task management system designed
+            to help you manage your daily work efficiently. Create tasks, set priorities, track
+            progress, and stay on top of your deadlines all in one place.
           </p>
-          <div className="feature-grid">
-            <article className="feature-card">JWT authentication</article>
-            <article className="feature-card">PostgreSQL-backed data</article>
-            <article className="feature-card">Phase-by-phase commit history</article>
-            <article className="feature-card">Responsive UI scaffold</article>
-          </div>
         </section>
 
         <section className="auth-card">
@@ -125,7 +121,7 @@ export default function App() {
               {theme === "dark" ? "Light mode" : "Dark mode"}
             </button>
           </div>
-          <h2>Use the default admin account</h2>
+          <h2>Sign in to continue</h2>
           <form className="auth-form" onSubmit={handleLogin}>
             <label>
               Email
@@ -155,10 +151,6 @@ export default function App() {
               {submitting ? "Signing in..." : "Login"}
             </button>
           </form>
-
-          <p className="auth-footnote">
-            Default credentials: <strong>admin@test.com</strong> / <strong>123456</strong>
-          </p>
         </section>
       </main>
     );

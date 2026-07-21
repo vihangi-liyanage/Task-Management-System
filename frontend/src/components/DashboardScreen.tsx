@@ -231,6 +231,11 @@ export function DashboardScreen({
         </div>
       </header>
 
+      <section className="hero-card dashboard-banner">
+        <p className="eyebrow">Ready to Get Things Done?</p>
+        <h2>Start organizing your tasks and take control of your productivity today.</h2>
+      </section>
+
       <SummaryCards summary={summary} />
 
       <section className="toolbar panel">

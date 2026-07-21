@@ -107,24 +107,9 @@ h1 {
   line-height: 1.7;
 }
 
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px;
-  margin-top: 28px;
-}
-
-.feature-card,
-.login-hint {
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  background: var(--surface-soft);
-  padding: 16px 18px;
-  color: var(--text);
-}
-
-.login-hint {
-  margin-top: 20px;
+.hero-copy {
+  max-width: 64ch;
+  font-size: 1.1rem;
 }
 
 .login-layout {
@@ -151,7 +136,7 @@ h1 {
   margin: 0 0 10px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: #7dd3fc;
+  color: var(--accent);
   font-size: 0.78rem;
 }
 
@@ -160,6 +145,14 @@ h1 {
   margin: 0;
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   color: var(--headline);
+}
+
+.dashboard-banner {
+  padding-block: clamp(20px, 4vw, 34px);
+}
+
+.dashboard-banner h2 {
+  max-width: 28ch;
 }
 
 .card-topline,
@@ -231,11 +224,6 @@ h1 {
   background: color-mix(in srgb, var(--danger) 14%, transparent);
   border: 1px solid color-mix(in srgb, var(--danger) 24%, transparent);
   color: var(--danger);
-}
-
-.auth-footnote {
-  margin: 18px 0 0;
-  color: var(--muted);
 }
 
 .field-error {
@@ -319,7 +307,7 @@ h1 {
 .task-form label {
   display: grid;
   gap: 8px;
-  color: #cbd5e1;
+  color: var(--text);
   font-size: 0.95rem;
 }
 
@@ -367,17 +355,19 @@ h1 {
 .task-form-actions {
   display: flex;
   justify-content: flex-end;
+  padding-top: 8px;
 }
 
 .task-form-actions button {
   border: 0;
   border-radius: 14px;
-  padding: 14px 18px;
+  padding: 14px 22px;
   font: inherit;
   font-weight: 700;
   background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
   color: var(--cta-text);
   cursor: pointer;
+  min-width: 144px;
 }
 
 .empty-state {
