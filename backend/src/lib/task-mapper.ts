@@ -6,10 +6,26 @@ type TaskRow = {
   description: string | null;
   priority: string;
   status: string;
-  due_date: string;
-  created_at: string;
-  updated_at: string;
+  due_date: string | Date;
+  created_at: string | Date;
+  updated_at: string | Date;
 };
+
+function toDateInput(value: string | Date) {
+  if (value instanceof Date) {
+    const year = value.getFullYear();
+    const month = String(value.getMonth() + 1).padStart(2, "0");
+    const day = String(value.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  return value.slice(0, 10);
+}
+
+function toIso(value: string | Date) {
+  const normalized = value instanceof Date ? value : new Date(value);
+  return normalized.toISOString();
+}
 
 export function mapTaskRow(row: TaskRow): Task {
   return {
@@ -18,9 +34,8 @@ export function mapTaskRow(row: TaskRow): Task {
     description: row.description ?? "",
     priority: row.priority as Task["priority"],
     status: row.status as Task["status"],
-    dueDate: row.due_date.slice(0, 10),
-    createdAt: new Date(row.created_at).toISOString(),
-    updatedAt: new Date(row.updated_at).toISOString(),
+    dueDate: toDateInput(row.due_date),
+    createdAt: toIso(row.created_at),
+    updatedAt: toIso(row.updated_at),
   };
 }
-

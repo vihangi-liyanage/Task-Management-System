@@ -8,8 +8,8 @@ import { getStoredTheme, storeTheme, type ThemeMode } from "./lib/theme";
 export default function App() {
   const [token, setToken] = useState<string | null>(() => getStoredToken());
   const [user, setUser] = useState<AuthUser | null>(null);
-  const [email, setEmail] = useState("admin@test.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [theme, setTheme] = useState<ThemeMode>(() => getStoredTheme());
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);

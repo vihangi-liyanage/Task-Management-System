@@ -78,7 +78,7 @@ npm run dev:backend
 
 The API defaults to:
 
-- `http://localhost:4000`
+- `http://localhost:3001`
 
 ## Running the Frontend
 
@@ -106,7 +106,7 @@ To stop and remove the containers and volume:
 npm run docker:down
 ```
 
-Docker exposes PostgreSQL on host port `5433` to avoid conflicts with any local database already using `5432`.
+Docker exposes PostgreSQL on host port `5433`, the backend on `3001`, and the frontend on `3000`.
 
 ## Theme Toggle
 
@@ -114,7 +114,7 @@ The UI includes a light mode and dark mode toggle in the login view and dashboar
 
 The frontend defaults to:
 
-- `http://localhost:5173`
+- `http://localhost:3000`
 
 ## Default Login
 
