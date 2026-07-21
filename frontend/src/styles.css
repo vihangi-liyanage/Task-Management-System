@@ -176,6 +176,17 @@ body {
   animation-delay: -1.8s;
 }
 
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.hero-header .eyebrow {
+  margin: 0;
+}
+
 .eyebrow {
   margin: 0 0 12px;
   text-transform: uppercase;
@@ -203,12 +214,12 @@ h1 {
   font-size: 1.1rem;
 }
 
-.eyebrow,
+.hero-header,
 .hero-copy {
   animation: fade-up 700ms ease both;
 }
 
-.eyebrow {
+.hero-header {
   animation-delay: 80ms;
 }
 

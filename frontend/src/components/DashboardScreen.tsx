@@ -6,6 +6,7 @@ import {
   fetchTasks,
   updateTask,
 } from "../lib/api";
+import { SunIcon, MoonIcon } from "../App";
 import type {
   AuthUser,
   Task,
@@ -222,8 +223,15 @@ export function DashboardScreen({
           <p className="lead">{user.email}</p>
         </div>
         <div className="topbar-actions">
-          <button className="ghost-button" type="button" onClick={onToggleTheme}>
-            {theme === "dark" ? "Light mode" : "Dark mode"}
+          <button
+            className="ghost-button icon-button"
+            type="button"
+            onClick={onToggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            <span className="button-icon" aria-hidden="true">
+              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+            </span>
           </button>
           <button className="ghost-button" type="button" onClick={onLogout}>
             Logout

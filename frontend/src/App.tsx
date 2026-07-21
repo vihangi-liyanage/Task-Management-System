@@ -116,7 +116,19 @@ export default function App() {
             <span className="hero-gridline hero-gridline-a" />
             <span className="hero-gridline hero-gridline-b" />
           </div>
-          <p className="eyebrow">Task Management System</p>
+          <div className="hero-header">
+            <p className="eyebrow">Task Management System</p>
+            <button
+              className="ghost-button icon-button"
+              type="button"
+              onClick={toggleTheme}
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              <span className="button-icon" aria-hidden="true">
+                {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+              </span>
+            </button>
+          </div>
           <h1>Manage Your Tasks. Achieve Your Goals.</h1>
           <p className="lead hero-copy">
             Stay organized, focused, and productive with a simple task management system designed
@@ -200,7 +212,7 @@ export default function App() {
   );
 }
 
-function SunIcon() {
+export function SunIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.8" />
@@ -214,7 +226,7 @@ function SunIcon() {
   );
 }
 
-function MoonIcon() {
+export function MoonIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
