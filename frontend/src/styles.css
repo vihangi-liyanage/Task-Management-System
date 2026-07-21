@@ -273,6 +273,18 @@ h1 {
   gap: 12px;
 }
 
+.button-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+
+.button-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
 .auth-form {
   display: grid;
   gap: 14px;
@@ -286,6 +298,12 @@ h1 {
   font-size: 0.95rem;
 }
 
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .auth-form input {
   width: 100%;
   border: 1px solid var(--border);
@@ -296,12 +314,46 @@ h1 {
   font: inherit;
 }
 
+.password-field input {
+  padding-right: 52px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.password-toggle:hover {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.password-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
 .auth-form input:focus {
   outline: 2px solid color-mix(in srgb, var(--accent) 50%, transparent);
   border-color: color-mix(in srgb, var(--accent) 70%, transparent);
 }
 
-.auth-form button,
+.auth-form button:not(.password-toggle),
 .ghost-button {
   border: 0;
   border-radius: 14px;
@@ -311,7 +363,7 @@ h1 {
   cursor: pointer;
 }
 
-.auth-form button {
+.auth-form button:not(.password-toggle) {
   background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
   color: var(--cta-text);
   transition:
@@ -319,12 +371,12 @@ h1 {
     filter 180ms ease;
 }
 
-.auth-form button:hover:not(:disabled) {
+.auth-form button:not(.password-toggle):hover:not(:disabled) {
   transform: translateY(-1px);
   filter: brightness(1.02);
 }
 
-.auth-form button:disabled {
+.auth-form button:not(.password-toggle):disabled {
   opacity: 0.7;
   cursor: progress;
 }
@@ -342,6 +394,16 @@ h1 {
 .ghost-button:hover {
   transform: translateY(-1px);
   border-color: color-mix(in srgb, var(--accent) 24%, var(--border));
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: 999px;
 }
 
 .topbar-actions .ghost-button {
