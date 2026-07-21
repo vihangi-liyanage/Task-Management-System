@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import { env } from "./config/env.js";
 import { authRouter } from "./routes/auth.js";
 import { dashboardRouter } from "./routes/dashboard.js";
 import { healthRouter } from "./routes/health.js";
@@ -11,7 +12,7 @@ export function createApp() {
 
   app.use(
     cors({
-      origin: true,
+      origin: env.FRONTEND_URL,
       credentials: true,
     }),
   );

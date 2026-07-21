@@ -24,6 +24,8 @@ import { todayAsDateInput } from "../lib/date";
 type DashboardScreenProps = {
   token: string;
   user: AuthUser;
+  theme: "dark" | "light";
+  onToggleTheme: () => void;
   onLogout: () => Promise<void> | void;
 };
 
@@ -50,7 +52,13 @@ const initialSummary: TaskSummary = {
   overdue: 0,
 };
 
-export function DashboardScreen({ token, user, onLogout }: DashboardScreenProps) {
+export function DashboardScreen({
+  token,
+  user,
+  theme,
+  onToggleTheme,
+  onLogout,
+}: DashboardScreenProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [summary, setSummary] = useState<TaskSummary>(initialSummary);
   const [filters, setFilters] = useState<TaskFilters>(defaultFilters);
@@ -213,9 +221,14 @@ export function DashboardScreen({ token, user, onLogout }: DashboardScreenProps)
           <h1>Welcome back, {user.name}</h1>
           <p className="lead">{user.email}</p>
         </div>
-        <button className="ghost-button" type="button" onClick={onLogout}>
-          Logout
-        </button>
+        <div className="topbar-actions">
+          <button className="ghost-button" type="button" onClick={onToggleTheme}>
+            {theme === "dark" ? "Light mode" : "Dark mode"}
+          </button>
+          <button className="ghost-button" type="button" onClick={onLogout}>
+            Logout
+          </button>
+        </div>
       </header>
 
       <SummaryCards summary={summary} />

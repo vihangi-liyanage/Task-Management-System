@@ -106,7 +106,8 @@ tasksRouter.get(
 tasksRouter.get(
   "/:id",
   asyncRoute(async (req, res) => {
-    const task = await findTaskById(req.params.id, req.user!.id);
+    const taskId = String(req.params.id);
+    const task = await findTaskById(taskId, req.user!.id);
     if (!task) {
       throw new ApiError(404, "Task not found");
     }
@@ -151,7 +152,8 @@ tasksRouter.put(
       throw new ApiError(400, "Invalid task data", parsed.error.flatten());
     }
 
-    const existing = await findTaskById(req.params.id, req.user!.id);
+    const taskId = String(req.params.id);
+    const existing = await findTaskById(taskId, req.user!.id);
     if (!existing) {
       throw new ApiError(404, "Task not found");
     }
@@ -174,7 +176,7 @@ tasksRouter.put(
         parsed.data.priority,
         parsed.data.status,
         parsed.data.dueDate,
-        req.params.id,
+        taskId,
         req.user!.id,
       ],
     );
@@ -186,9 +188,10 @@ tasksRouter.put(
 tasksRouter.delete(
   "/:id",
   asyncRoute(async (req, res) => {
+    const taskId = String(req.params.id);
     const deleted = await pool.query(
       `DELETE FROM tasks WHERE id = $1 AND user_id = $2 RETURNING id`,
-      [req.params.id, req.user!.id],
+      [taskId, req.user!.id],
     );
 
     if (!deleted.rowCount) {
@@ -198,4 +201,3 @@ tasksRouter.delete(
     res.status(204).send();
   }),
 );
-

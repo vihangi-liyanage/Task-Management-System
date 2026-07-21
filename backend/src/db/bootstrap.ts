@@ -2,7 +2,25 @@ import bcrypt from "bcryptjs";
 import { env } from "../config/env.js";
 import { pool } from "./pool.js";
 
+async function waitForDatabase(retries = 20, delayMs = 1500) {
+  let attempt = 0;
+
+  while (attempt < retries) {
+    try {
+      await pool.query("SELECT 1");
+      return;
+    } catch (error) {
+      attempt += 1;
+      if (attempt >= retries) {
+        throw error;
+      }
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+  }
+}
+
 export async function bootstrapDatabase() {
+  await waitForDatabase();
   await pool.query(`CREATE EXTENSION IF NOT EXISTS pgcrypto;`);
   await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
@@ -57,4 +75,3 @@ export async function bootstrapDatabase() {
     ["Admin User", env.ADMIN_EMAIL, passwordHash],
   );
 }
-

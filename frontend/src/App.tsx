@@ -3,15 +3,22 @@ import { clearStoredToken, getStoredToken, setStoredToken } from "./lib/storage"
 import { fetchCurrentUser, login, logout } from "./lib/api";
 import type { AuthUser } from "./types";
 import { DashboardScreen } from "./components/DashboardScreen";
+import { getStoredTheme, storeTheme, type ThemeMode } from "./lib/theme";
 
 export default function App() {
   const [token, setToken] = useState<string | null>(() => getStoredToken());
   const [user, setUser] = useState<AuthUser | null>(null);
   const [email, setEmail] = useState("admin@test.com");
   const [password, setPassword] = useState("123456");
+  const [theme, setTheme] = useState<ThemeMode>(() => getStoredTheme());
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    storeTheme(theme);
+  }, [theme]);
 
   useEffect(() => {
     let active = true;
@@ -90,6 +97,10 @@ export default function App() {
     );
   }
 
+  function toggleTheme() {
+    setTheme((current) => (current === "dark" ? "light" : "dark"));
+  }
+
   if (!user) {
     return (
       <main className="app-shell login-layout">
@@ -108,7 +119,12 @@ export default function App() {
         </section>
 
         <section className="auth-card">
-          <p className="auth-kicker">Sign in</p>
+          <div className="card-topline">
+            <p className="auth-kicker">Sign in</p>
+            <button className="ghost-button" type="button" onClick={toggleTheme}>
+              {theme === "dark" ? "Light mode" : "Dark mode"}
+            </button>
+          </div>
           <h2>Use the default admin account</h2>
           <form className="auth-form" onSubmit={handleLogin}>
             <label>
@@ -148,7 +164,17 @@ export default function App() {
     );
   }
 
+  if (!token) {
+    return null;
+  }
+
   return (
-    <DashboardScreen token={token} user={user} onLogout={handleLogout} />
+    <DashboardScreen
+      token={token}
+      user={user}
+      theme={theme}
+      onToggleTheme={toggleTheme}
+      onLogout={handleLogout}
+    />
   );
 }

@@ -9,4 +9,4 @@ coverage
 frontend/dist
 backend/dist
 .vite
-
+*.tsbuildinfo

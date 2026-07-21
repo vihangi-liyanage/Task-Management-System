@@ -1,11 +1,54 @@
 :root {
-  color-scheme: dark;
   font-family:
     Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color-scheme: dark;
+  --bg-start: #0f172a;
+  --bg-end: #020617;
+  --bg-accent: rgba(56, 189, 248, 0.18);
+  --surface: rgba(15, 23, 42, 0.78);
+  --surface-strong: rgba(15, 23, 42, 0.86);
+  --surface-soft: rgba(30, 41, 59, 0.55);
+  --border: rgba(148, 163, 184, 0.18);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --headline: #ffffff;
+  --input-bg: rgba(15, 23, 42, 0.9);
+  --input-text: #f8fafc;
+  --shadow: rgba(2, 6, 23, 0.45);
+  --accent: #7dd3fc;
+  --cta-start: #38bdf8;
+  --cta-end: #14b8a6;
+  --cta-text: #082f49;
+  --danger: #fca5a5;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg-start: #f8fafc;
+  --bg-end: #dbeafe;
+  --bg-accent: rgba(59, 130, 246, 0.18);
+  --surface: rgba(255, 255, 255, 0.76);
+  --surface-strong: rgba(255, 255, 255, 0.9);
+  --surface-soft: rgba(241, 245, 249, 0.9);
+  --border: rgba(148, 163, 184, 0.28);
+  --text: #0f172a;
+  --muted: #475569;
+  --headline: #020617;
+  --input-bg: rgba(255, 255, 255, 0.95);
+  --input-text: #0f172a;
+  --shadow: rgba(15, 23, 42, 0.12);
+  --accent: #0284c7;
+  --cta-start: #0ea5e9;
+  --cta-end: #14b8a6;
+  --cta-text: #f8fafc;
+  --danger: #dc2626;
+}
+
+html {
   background:
-    radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 30%),
-    linear-gradient(180deg, #0f172a 0%, #020617 100%);
-  color: #e2e8f0;
+    radial-gradient(circle at top, var(--bg-accent), transparent 30%),
+    linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  color: var(--text);
 }
 
 * {
@@ -21,6 +64,8 @@ body,
 
 body {
   min-height: 100vh;
+  background: inherit;
+  color: var(--text);
 }
 
 .app-shell {
@@ -32,19 +77,19 @@ body {
 
 .hero-card {
   width: min(960px, 100%);
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  border: 1px solid var(--border);
   border-radius: 28px;
   padding: clamp(24px, 5vw, 48px);
-  background: rgba(15, 23, 42, 0.7);
+  background: var(--surface);
   backdrop-filter: blur(16px);
-  box-shadow: 0 32px 80px rgba(2, 6, 23, 0.45);
+  box-shadow: 0 32px 80px var(--shadow);
 }
 
 .eyebrow {
   margin: 0 0 12px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: #7dd3fc;
+  color: var(--accent);
   font-size: 0.78rem;
 }
 
@@ -57,7 +102,7 @@ h1 {
 .lead {
   max-width: 60ch;
   margin: 18px 0 0;
-  color: #cbd5e1;
+  color: var(--muted);
   font-size: 1.05rem;
   line-height: 1.7;
 }
@@ -72,10 +117,10 @@ h1 {
 .feature-card,
 .login-hint {
   border-radius: 18px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  background: rgba(30, 41, 59, 0.55);
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
   padding: 16px 18px;
-  color: #e2e8f0;
+  color: var(--text);
 }
 
 .login-hint {
@@ -95,11 +140,11 @@ h1 {
 }
 
 .auth-card {
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  background: rgba(15, 23, 42, 0.86);
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
   border-radius: 28px;
   padding: clamp(24px, 4vw, 32px);
-  box-shadow: 0 32px 80px rgba(2, 6, 23, 0.42);
+  box-shadow: 0 32px 80px var(--shadow);
 }
 
 .auth-kicker {
@@ -114,6 +159,15 @@ h1 {
 .dashboard-shell h2 {
   margin: 0;
   font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--headline);
+}
+
+.card-topline,
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .auth-form {
@@ -125,23 +179,23 @@ h1 {
 .auth-form label {
   display: grid;
   gap: 8px;
-  color: #cbd5e1;
+  color: var(--text);
   font-size: 0.95rem;
 }
 
 .auth-form input {
   width: 100%;
-  border: 1px solid rgba(148, 163, 184, 0.22);
+  border: 1px solid var(--border);
   border-radius: 14px;
-  background: rgba(15, 23, 42, 0.9);
-  color: #f8fafc;
+  background: var(--input-bg);
+  color: var(--input-text);
   padding: 14px 16px;
   font: inherit;
 }
 
 .auth-form input:focus {
-  outline: 2px solid rgba(125, 211, 252, 0.5);
-  border-color: rgba(125, 211, 252, 0.7);
+  outline: 2px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
 }
 
 .auth-form button,
@@ -155,8 +209,8 @@ h1 {
 }
 
 .auth-form button {
-  background: linear-gradient(135deg, #38bdf8, #14b8a6);
-  color: #082f49;
+  background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+  color: var(--cta-text);
 }
 
 .auth-form button:disabled {
@@ -165,27 +219,27 @@ h1 {
 }
 
 .ghost-button {
-  background: rgba(148, 163, 184, 0.12);
-  color: #e2e8f0;
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: var(--surface-soft);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .error-banner {
   margin: 0;
   padding: 12px 14px;
   border-radius: 14px;
-  background: rgba(239, 68, 68, 0.14);
-  border: 1px solid rgba(239, 68, 68, 0.24);
-  color: #fecaca;
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 24%, transparent);
+  color: var(--danger);
 }
 
 .auth-footnote {
   margin: 18px 0 0;
-  color: #94a3b8;
+  color: var(--muted);
 }
 
 .field-error {
-  color: #fca5a5;
+  color: var(--danger);
   font-size: 0.82rem;
 }
 
@@ -219,11 +273,11 @@ h1 {
 
 .summary-card,
 .panel {
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid var(--border);
+  background: var(--surface);
   backdrop-filter: blur(16px);
   border-radius: 22px;
-  box-shadow: 0 20px 50px rgba(2, 6, 23, 0.25);
+  box-shadow: 0 20px 50px var(--shadow);
 }
 
 .summary-card {
@@ -234,7 +288,7 @@ h1 {
 .panel-header p,
 .muted {
   margin: 0;
-  color: #94a3b8;
+  color: var(--muted);
 }
 
 .summary-card strong {
@@ -275,10 +329,10 @@ h1 {
 .task-form select,
 .task-form textarea {
   width: 100%;
-  border: 1px solid rgba(148, 163, 184, 0.22);
+  border: 1px solid var(--border);
   border-radius: 14px;
-  background: rgba(15, 23, 42, 0.9);
-  color: #f8fafc;
+  background: var(--input-bg);
+  color: var(--input-text);
   padding: 14px 16px;
   font: inherit;
 }
@@ -288,8 +342,8 @@ h1 {
 .task-form input:focus,
 .task-form select:focus,
 .task-form textarea:focus {
-  outline: 2px solid rgba(125, 211, 252, 0.5);
-  border-color: rgba(125, 211, 252, 0.7);
+  outline: 2px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
 }
 
 .content-grid {
@@ -321,8 +375,8 @@ h1 {
   padding: 14px 18px;
   font: inherit;
   font-weight: 700;
-  background: linear-gradient(135deg, #38bdf8, #14b8a6);
-  color: #082f49;
+  background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+  color: var(--cta-text);
   cursor: pointer;
 }
 
@@ -351,7 +405,7 @@ td {
 }
 
 th {
-  color: #94a3b8;
+  color: var(--muted);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -359,7 +413,7 @@ th {
 
 .table-description {
   margin: 6px 0 0;
-  color: #94a3b8;
+  color: var(--muted);
   font-size: 0.92rem;
 }
 
@@ -372,14 +426,14 @@ th {
 .text-button {
   border: 0;
   background: transparent;
-  color: #7dd3fc;
+  color: var(--accent);
   padding: 0;
   font: inherit;
   cursor: pointer;
 }
 
 .text-button.danger {
-  color: #fca5a5;
+  color: var(--danger);
 }
 
 .pill {

@@ -92,6 +92,26 @@ To run both together:
 npm run dev
 ```
 
+## Docker
+
+Build and run the full stack with Docker Compose:
+
+```bash
+npm run docker:up
+```
+
+To stop and remove the containers and volume:
+
+```bash
+npm run docker:down
+```
+
+Docker exposes PostgreSQL on host port `5433` to avoid conflicts with any local database already using `5432`.
+
+## Theme Toggle
+
+The UI includes a light mode and dark mode toggle in the login view and dashboard header. The selected theme is saved in local storage.
+
 The frontend defaults to:
 
 - `http://localhost:5173`
