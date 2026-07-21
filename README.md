@@ -2,52 +2,74 @@
 
 Full-stack task management assessment project for Koncepthive.
 
-## Overview
+## Project Overview
 
-This repository contains a monorepo with:
+This is a monorepo task management system with:
 
-- A React + TypeScript frontend
-- A Node.js + Express + TypeScript backend
-- A PostgreSQL database schema and migration file
+- A React frontend
+- A Node.js + Express backend
+- A PostgreSQL database
 
-The app supports:
+It supports:
 
 - Admin login and logout
 - Protected dashboard access
 - Task CRUD
 - Search, filtering, and sorting
 - Dashboard task summaries
+- Light mode and dark mode
 - Responsive layouts for desktop, tablet, and mobile
 
-## Tech Stack
+## Technology Stack
 
 - Frontend: React, TypeScript, Vite
 - Backend: Node.js, Express, TypeScript
 - Database: PostgreSQL
-- Auth: JWT
+- Authentication: JWT
 - Validation: Zod
+- Styling: Plain CSS with theme variables and motion effects
+- Containerization: Docker, Docker Compose
 
-## Project Structure
+## Interview File Guide
 
-- `frontend/` - React app
-- `backend/` - Express API
-- `database/` - SQL migration files
+Use this section to explain the most important files during your interview:
 
-## Installation
+- [frontend/src/App.tsx](frontend/src/App.tsx) - Root frontend controller for login, session handling, and theme switching.
+- [frontend/src/components/DashboardScreen.tsx](frontend/src/components/DashboardScreen.tsx) - Protected dashboard page with task loading, filters, summary cards, and CRUD actions.
+- [frontend/src/components/TaskForm.tsx](frontend/src/components/TaskForm.tsx) - Create/edit task form with validation display.
+- [frontend/src/components/TaskList.tsx](frontend/src/components/TaskList.tsx) - Task table/list view with edit and delete actions.
+- [frontend/src/lib/api.ts](frontend/src/lib/api.ts) - Frontend API client for auth, tasks, and dashboard calls.
+- [frontend/src/styles.css](frontend/src/styles.css) - Theme system, layout, responsive design, and animations.
+- [backend/src/app.ts](backend/src/app.ts) - Express app setup, middleware, and route registration.
+- [backend/src/server.ts](backend/src/server.ts) - Backend entry point that starts the server and bootstraps the database.
+- [backend/src/config/env.ts](backend/src/config/env.ts) - Environment variable validation and defaults.
+- [backend/src/routes/auth.ts](backend/src/routes/auth.ts) - Login, logout, and current-user endpoints.
+- [backend/src/routes/tasks.ts](backend/src/routes/tasks.ts) - Task CRUD endpoints with search, filters, and sorting.
+- [backend/src/routes/dashboard.ts](backend/src/routes/dashboard.ts) - Dashboard summary endpoint.
+- [backend/src/db/bootstrap.ts](backend/src/db/bootstrap.ts) - Creates tables and seeds the default admin user.
+- [database/migrations/001_init.sql](database/migrations/001_init.sql) - SQL migration for the schema.
+
+## Installation Instructions
 
 1. Install dependencies:
 
-   ```bash
+   ```powershell
    npm install
    ```
 
-2. Copy the example environment file and fill in values if needed:
+2. Copy the example environment file:
 
-   ```bash
+   ```powershell
    Copy-Item .env.example .env
    ```
 
-3. Create the PostgreSQL database and run the migration in `database/migrations/001_init.sql`.
+3. Confirm your `.env` values if needed:
+
+   - `DATABASE_URL`
+   - `JWT_SECRET`
+   - `PORT`
+   - `FRONTEND_URL`
+   - `VITE_API_URL`
 
 ## Environment Variables
 
@@ -64,62 +86,44 @@ Root `.env.example` contains:
 
 ## Database Setup
 
-The backend bootstraps the schema on startup and seeds the default admin user if it does not exist.
+The app uses PostgreSQL. You can run it either:
 
-The migration file is also included at:
+- locally with your own PostgreSQL instance, or
+- through Docker Compose
 
-- `database/migrations/001_init.sql`
+The backend also bootstraps the schema on startup and seeds the default admin user.
+
+Migration file:
+
+- [database/migrations/001_init.sql](database/migrations/001_init.sql)
 
 ## Running the Backend
 
-```bash
+From the repo root:
+
+```powershell
 npm run dev:backend
 ```
 
-The API defaults to:
+Backend URL:
 
 - `http://localhost:3001`
 
+Health check:
+
+- `http://localhost:3001/api/health`
+
 ## Running the Frontend
 
-```bash
+From the repo root:
+
+```powershell
 npm run dev:frontend
 ```
 
-To run both together:
-
-```bash
-npm run dev
-```
-
-## Docker
-
-Build and run the full stack with Docker Compose:
-
-```bash
-npm run docker:up
-```
-
-To stop and remove the containers and volume:
-
-```bash
-npm run docker:down
-```
-
-Docker exposes PostgreSQL on host port `5433`, the backend on `3001`, and the frontend on `3000`.
-
-## Theme Toggle
-
-The UI includes a light mode and dark mode toggle in the login view and dashboard header. The selected theme is saved in local storage.
-
-The frontend defaults to:
+Frontend URL:
 
 - `http://localhost:3000`
-
-## Default Login
-
-- Email: `admin@test.com`
-- Password: `123456`
 
 ## API Documentation
 
@@ -137,7 +141,7 @@ The frontend defaults to:
 - `PUT /api/tasks/:id`
 - `DELETE /api/tasks/:id`
 
-Query params supported on `GET /api/tasks`:
+Query parameters for `GET /api/tasks`:
 
 - `search`
 - `status`
@@ -152,19 +156,38 @@ Query params supported on `GET /api/tasks`:
 
 - `GET /api/health`
 
-## Assumptions
+## Assumptions Made
 
-- The project is a single-admin assessment, so registration is intentionally omitted.
-- The default admin account is automatically seeded.
-- JWT is used for authentication instead of sessions.
-- The repository is structured as a monorepo for simpler local development.
+- The assessment uses a single default admin account, so registration is not included.
+- JWT is used for authentication because it is the preferred option in the brief.
+- The project is organized as a monorepo to keep frontend and backend together.
+- Tasks belong to the authenticated user.
+- The default admin account is seeded automatically on backend startup.
 
 ## Known Limitations
 
 - No pagination yet.
-- No Docker setup.
-- No automated test suite included.
-- Refresh tokens are not implemented.
+- No refresh token flow.
+- No automated test suite yet.
+- Docker PostgreSQL is mapped to host port `5433` to avoid local port conflicts.
+
+## Docker Commands
+
+```powershell
+npm run docker:up
+npm run docker:down
+```
+
+Docker URLs:
+
+- Frontend: `http://localhost:3000`
+- Backend: `http://localhost:3001`
+- PostgreSQL: `localhost:5433`
+
+## Default Login
+
+- Email: `admin@test.com`
+- Password: `123456`
 
 ## Commit History
 
@@ -173,3 +196,6 @@ The repository was developed in phases:
 - Initial project setup
 - Authentication flow
 - Task management dashboard
+- Docker support and theme toggle
+- Local run port alignment and task create fix
+
