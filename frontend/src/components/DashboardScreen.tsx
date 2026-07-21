@@ -6,7 +6,7 @@ import {
   fetchTasks,
   updateTask,
 } from "../lib/api";
-import { SunIcon, MoonIcon } from "../App";
+import { SunIcon, MoonIcon } from "./icons";
 import type {
   AuthUser,
   Task,

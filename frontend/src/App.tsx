@@ -4,6 +4,7 @@ import { fetchCurrentUser, login, logout } from "./lib/api";
 import type { AuthUser } from "./types";
 import { DashboardScreen } from "./components/DashboardScreen";
 import { getStoredTheme, storeTheme, type ThemeMode } from "./lib/theme";
+import { SunIcon, MoonIcon, EyeIcon } from "./components/icons";
 
 export default function App() {
   const [token, setToken] = useState<string | null>(() => getStoredToken());
@@ -86,6 +87,14 @@ export default function App() {
     setUser(null);
   }
 
+  function toggleTheme() {
+    setTheme((current) => (current === "dark" ? "light" : "dark"));
+  }
+
+  function togglePasswordVisibility() {
+    setShowPassword((current) => !current);
+  }
+
   if (loading) {
     return (
       <main className="app-shell">
@@ -98,14 +107,6 @@ export default function App() {
     );
   }
 
-  function toggleTheme() {
-    setTheme((current) => (current === "dark" ? "light" : "dark"));
-  }
-
-  function togglePasswordVisibility() {
-    setShowPassword((current) => !current);
-  }
-
   if (!user) {
     return (
       <main className="app-shell login-layout">
@@ -116,19 +117,7 @@ export default function App() {
             <span className="hero-gridline hero-gridline-a" />
             <span className="hero-gridline hero-gridline-b" />
           </div>
-          <div className="hero-header">
-            <p className="eyebrow">Task Management System</p>
-            <button
-              className="ghost-button icon-button"
-              type="button"
-              onClick={toggleTheme}
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              <span className="button-icon" aria-hidden="true">
-                {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-              </span>
-            </button>
-          </div>
+          <p className="eyebrow">Task Management System</p>
           <h1>Manage Your Tasks. Achieve Your Goals.</h1>
           <p className="lead hero-copy">
             Stay organized, focused, and productive with a simple task management system designed
@@ -209,69 +198,5 @@ export default function App() {
       onToggleTheme={toggleTheme}
       onLogout={handleLogout}
     />
-  );
-}
-
-export function SunIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.8" />
-      <path
-        d="M12 2.8v2.1M12 19.1v2.1M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2.8 12h2.1M19.1 12h2.1M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-export function MoonIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M18.5 14.8A7.5 7.5 0 1 1 9.2 5.5a6.8 6.8 0 1 0 9.3 9.3Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function EyeIcon({ hidden }: { hidden: boolean }) {
-  if (hidden) {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path
-          d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M10.2 12a1.8 1.8 0 1 0 3.6 0 1.8 1.8 0 0 0-3.6 0Z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-        />
-        <path d="M4 20 20 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 9.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-    </svg>
   );
 }

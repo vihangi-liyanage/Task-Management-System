@@ -78,11 +78,6 @@ export async function fetchTasks(token: string, filters: TaskFilters) {
   });
 }
 
-export async function fetchTask(token: string, taskId: string) {
-  return request<{ item: Task }>(`/tasks/${taskId}`, {
-    token,
-  });
-}
 
 export async function createTask(token: string, payload: TaskInput) {
   return request<{ item: Task }>("/tasks", {

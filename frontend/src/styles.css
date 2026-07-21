@@ -20,6 +20,16 @@
   --cta-end: #14b8a6;
   --cta-text: #082f49;
   --danger: #fca5a5;
+  /* pill colours — dark mode */
+  --pill-low-bg: rgba(59, 130, 246, 0.18);
+  --pill-low-text: #93c5fd;
+  --pill-medium-bg: rgba(245, 158, 11, 0.18);
+  --pill-medium-text: #fcd34d;
+  --pill-high-bg: rgba(34, 197, 94, 0.18);
+  --pill-high-text: #86efac;
+  --banner-success-bg: rgba(34, 197, 94, 0.14);
+  --banner-success-border: rgba(34, 197, 94, 0.24);
+  --banner-success-text: #86efac;
 }
 
 :root[data-theme="light"] {
@@ -42,6 +52,16 @@
   --cta-end: #14b8a6;
   --cta-text: #f8fafc;
   --danger: #dc2626;
+  /* pill colours — light mode */
+  --pill-low-bg: rgba(37, 99, 235, 0.1);
+  --pill-low-text: #1d4ed8;
+  --pill-medium-bg: rgba(180, 83, 9, 0.1);
+  --pill-medium-text: #92400e;
+  --pill-high-bg: rgba(22, 163, 74, 0.1);
+  --pill-high-text: #15803d;
+  --banner-success-bg: rgba(22, 163, 74, 0.1);
+  --banner-success-border: rgba(22, 163, 74, 0.2);
+  --banner-success-text: #15803d;
 }
 
 html {
@@ -199,6 +219,8 @@ h1 {
   margin: 0;
   font-size: clamp(2.2rem, 6vw, 4.5rem);
   line-height: 0.98;
+  animation: fade-up 760ms ease both;
+  animation-delay: 160ms;
 }
 
 .lead {
@@ -212,24 +234,13 @@ h1 {
 .hero-copy {
   max-width: 64ch;
   font-size: 1.1rem;
-}
-
-.hero-header,
-.hero-copy {
   animation: fade-up 700ms ease both;
+  animation-delay: 260ms;
 }
 
 .hero-header {
+  animation: fade-up 700ms ease both;
   animation-delay: 80ms;
-}
-
-h1 {
-  animation: fade-up 760ms ease both;
-  animation-delay: 160ms;
-}
-
-.hero-copy {
-  animation-delay: 260ms;
 }
 
 .login-layout {
@@ -650,29 +661,29 @@ th {
 
 .priority-low,
 .status-pending {
-  background: rgba(59, 130, 246, 0.14);
-  color: #bfdbfe;
+  background: var(--pill-low-bg);
+  color: var(--pill-low-text);
 }
 
 .priority-medium,
 .status-in_progress {
-  background: rgba(245, 158, 11, 0.14);
-  color: #fde68a;
+  background: var(--pill-medium-bg);
+  color: var(--pill-medium-text);
 }
 
 .priority-high,
 .status-completed {
-  background: rgba(34, 197, 94, 0.14);
-  color: #bbf7d0;
+  background: var(--pill-high-bg);
+  color: var(--pill-high-text);
 }
 
 .success-banner {
   margin: 0;
   padding: 12px 14px;
   border-radius: 14px;
-  background: rgba(34, 197, 94, 0.14);
-  border: 1px solid rgba(34, 197, 94, 0.24);
-  color: #bbf7d0;
+  background: var(--banner-success-bg);
+  border: 1px solid var(--banner-success-border);
+  color: var(--banner-success-text);
 }
 
 @media (max-width: 640px) {
