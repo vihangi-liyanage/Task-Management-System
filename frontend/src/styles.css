@@ -76,6 +76,8 @@ body {
 }
 
 .hero-card {
+  position: relative;
+  overflow: hidden;
   width: min(960px, 100%);
   border: 1px solid var(--border);
   border-radius: 28px;
@@ -83,6 +85,95 @@ body {
   background: var(--surface);
   backdrop-filter: blur(16px);
   box-shadow: 0 32px 80px var(--shadow);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.hero-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  box-shadow: 0 42px 100px var(--shadow);
+}
+
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent) 10%, transparent) 48%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  animation: hero-shine 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-orb,
+.hero-gridline {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.hero-orb {
+  filter: blur(2px);
+  opacity: 0.9;
+  animation: float 7s ease-in-out infinite;
+}
+
+.hero-orb-a {
+  width: 160px;
+  height: 160px;
+  top: -28px;
+  right: -34px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 24%, transparent), transparent 68%);
+}
+
+.hero-orb-b {
+  width: 110px;
+  height: 110px;
+  bottom: 20px;
+  left: -18px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--cta-end) 18%, transparent), transparent 70%);
+  animation-delay: -2.4s;
+}
+
+.hero-gridline {
+  background: color-mix(in srgb, var(--border) 70%, transparent);
+  opacity: 0.45;
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.hero-gridline-a {
+  width: 220px;
+  height: 1px;
+  top: 28%;
+  right: -18px;
+  transform: rotate(-14deg);
+}
+
+.hero-gridline-b {
+  width: 160px;
+  height: 1px;
+  bottom: 26%;
+  left: -10px;
+  transform: rotate(18deg);
+  animation-delay: -1.8s;
 }
 
 .eyebrow {
@@ -110,6 +201,24 @@ h1 {
 .hero-copy {
   max-width: 64ch;
   font-size: 1.1rem;
+}
+
+.eyebrow,
+.hero-copy {
+  animation: fade-up 700ms ease both;
+}
+
+.eyebrow {
+  animation-delay: 80ms;
+}
+
+h1 {
+  animation: fade-up 760ms ease both;
+  animation-delay: 160ms;
+}
+
+.hero-copy {
+  animation-delay: 260ms;
 }
 
 .login-layout {
@@ -149,6 +258,7 @@ h1 {
 
 .dashboard-banner {
   padding-block: clamp(20px, 4vw, 34px);
+  animation: fade-up 700ms ease both;
 }
 
 .dashboard-banner h2 {
@@ -204,6 +314,14 @@ h1 {
 .auth-form button {
   background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
   color: var(--cta-text);
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.auth-form button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
 }
 
 .auth-form button:disabled {
@@ -215,6 +333,19 @@ h1 {
   background: var(--surface-soft);
   color: var(--text);
   border: 1px solid var(--border);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.ghost-button:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 24%, var(--border));
+}
+
+.topbar-actions .ghost-button {
+  min-width: 110px;
 }
 
 .error-banner {
@@ -368,6 +499,14 @@ h1 {
   color: var(--cta-text);
   cursor: pointer;
   min-width: 144px;
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.task-form-actions button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
 }
 
 .empty-state {
@@ -502,5 +641,58 @@ th {
 
   .task-form {
     position: static;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) scale(1.04);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.58;
+  }
+}
+
+@keyframes hero-shine {
+  0%,
+  45% {
+    transform: translateX(-120%);
+  }
+  70%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

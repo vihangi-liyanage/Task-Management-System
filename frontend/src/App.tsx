@@ -105,6 +105,12 @@ export default function App() {
     return (
       <main className="app-shell login-layout">
         <section className="hero-card login-copy">
+          <div className="hero-decor" aria-hidden="true">
+            <span className="hero-orb hero-orb-a" />
+            <span className="hero-orb hero-orb-b" />
+            <span className="hero-gridline hero-gridline-a" />
+            <span className="hero-gridline hero-gridline-b" />
+          </div>
           <p className="eyebrow">Task Management System</p>
           <h1>Manage Your Tasks. Achieve Your Goals.</h1>
           <p className="lead hero-copy">
