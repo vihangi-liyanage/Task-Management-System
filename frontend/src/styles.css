@@ -196,16 +196,6 @@ body {
   animation-delay: -1.8s;
 }
 
-.hero-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.hero-header .eyebrow {
-  margin: 0;
-}
 
 .eyebrow {
   margin: 0 0 12px;
@@ -238,10 +228,6 @@ h1 {
   animation-delay: 260ms;
 }
 
-.hero-header {
-  animation: fade-up 700ms ease both;
-  animation-delay: 80ms;
-}
 
 .login-layout {
   grid-template-columns: minmax(0, 1.4fr) minmax(320px, 420px);
