@@ -1,209 +1,155 @@
-Full Stack Web Developer Intern  
-Technical Assessment 
-Company:  Koncepthive 
-Position: Intern – Full Stack Web Developer 
-Assessment Overview 
-Thank you for your interest in joining our team. 
-As part of our recruitment process, we would like you to complete a small technical assessment. 
-This assignment is designed to evaluate your understanding of full-stack web development, 
-coding standards, problem-solving ability, and software design practices. 
-This is not expected to be a production-ready application. We are more interested in how you 
-structure your code, solve problems, and explain your decisions. 
-Assessment Duration  
-Deadline 23rd of July 11:59pm. Please submit your completed project within the agreed 
-deadline. 
-Objective 
-Develop a Task Management System that allows users to authenticate and manage their daily 
-tasks. The application should include both a frontend and backend with a database. 
-Technology Requirements 
-Frontend 
-Choose one: 
-● React.js (Preferred) 
-● Next.js 
-Backend 
-● Node.js 
-● Express.js 
-Preferred: TypeScript 
-Database 
-Choose one: 
-● PostgreSQL 
-● MySQL 
-Functional Requirements 
-1. User Authentication 
-Implement a simple authentication system. 
-Features 
-● Login 
-● Logout 
-No registration page is required. 
-Use the following default credentials: 
-Email 
-admin@test.com 
-Password 
-123456 
-Authentication may be implemented using: 
-● JWT (Preferred) 
-● Session-based authentication 
-2. Dashboard 
-After successful login, display a dashboard showing: 
-● Total Tasks 
-● Pending Tasks 
-● In Progress Tasks 
-● Completed Tasks 
-● Overdue Tasks 
-3. Task Management 
-Implement complete CRUD functionality. 
-Each task should contain the following fields: 
-Field 
-Title 
-Description 
-Priority (Low / Medium / High) 
-Required 
-Yes 
-No 
-Yes 
-Due Date 
-Status (Pending / In Progress / Completed) 
-Created Date 
-Last Updated Date 
-Users should be able to: 
-● Create Tasks 
-● View Tasks 
-● Update Tasks 
-● Delete Tasks 
-4. Search 
-Provide a search feature using: 
-● Task Title 
-Yes 
-Yes 
-Automatically Generated 
-Automatically Generated 
-Search should update the task list dynamically or after submission. 
-5. Filtering 
-Allow users to filter tasks by: 
-● Status 
-● Priority 
-Multiple filters may be applied together. 
-6. Sorting 
-Allow sorting by: 
-● Newest Created 
-● Oldest Created 
-● Due Date 
-7. Validation 
-Implement validation on both frontend and backend. 
-Examples: 
-● Title is required 
-● Due date cannot be earlier than today 
-● Priority is required 
-● Status is required 
-Display meaningful validation messages. 
-8. Responsive Design 
-The application should be usable on: 
-● Desktop 
-● Tablet 
-● Mobile 
-Responsive layouts are expected. 
-REST API Requirements 
-Implement RESTful APIs similar to the following: 
-POST   /api/auth/login 
-GET    /api/tasks 
-GET    /api/tasks/:id 
-POST   /api/tasks 
-PUT    /api/tasks/:id 
-DELETE /api/tasks/:id 
-Additional endpoints may be added if necessary. 
-Database Design 
-Minimum tables: 
-Users 
-id 
-name 
-email 
-password 
-created_at 
-updated_at 
-Tasks 
-id 
-title 
-description 
-priority 
-status 
-due_date 
-created_at 
-updated_at 
-Additional fields may be added where appropriate. 
-Project Structure 
-A clean project structure is expected. 
-Example: 
-project/ 
-├── frontend/ 
-├── backend/ 
-├── README.md 
-└── database/ 
-You may organize the project differently if justified. 
-Code Quality Expectations 
-A clean and maintainable codebase is expected. 
-Please follow good software development practices, including: 
-● Meaningful naming conventions 
-● Reusable components 
-● Proper folder structure 
-● Separation of concerns 
-● Consistent coding style 
-● Proper error handling 
-● Maintainable code 
-Avoid: 
-● Hardcoded values 
-● Unused code 
-● Large files containing unrelated logic 
-● Duplicate code 
-Git Requirements 
-Use Git throughout the development process. 
-Expected commit history should demonstrate development progress. 
-Example: 
-Initial project setup 
-Authentication 
-Task CRUD 
-Dashboard 
-Search and filtering 
-Bug fixes 
-Final cleanup 
-Avoid submitting the entire project in a single commit. 
-README Requirements 
-Include a README containing: 
-● Project Overview 
-● Technology Stack 
-● Installation Instructions 
-● Environment Variables 
-● Database Setup 
-● Running the Backend 
-● Running the Frontend 
-● API Documentation 
-● Assumptions Made 
-● Known Limitations (if any) 
-Bonus Features (Optional) 
-These are not required, but will be considered positively. 
-● Pagination 
-● Dark Mode 
-● Docker Support 
-● Unit Tests 
-● Loading Indicators 
-● Toast Notifications 
-● Refresh Token Authentication 
-● Deployment (Vercel, Netlify, Render, Railway, etc.) 
-Submission Requirements 
-Submit the following: 
-● GitHub Repository Link 
-● SQL Dump or Migration Files 
-● README.md 
-● .env.example file 
-Include: 
-● Frontend URL 
-● Backend URL 
-Submit to: career@koncepthive.com  
-Important Notes 
-● You may use any open-source libraries. 
-● You may refer to documentation and online resources during development. 
-● AI-assisted development tools (such as ChatGPT, GitHub Copilot, or Claude) may be 
-used, but you should fully understand the code you submit. During the interview, you will 
-be asked to explain your implementation and design decisions. 
-● Plagiarized or copied projects will be rejected. 
-We wish you the very best and look forward to reviewing your submission. 
-*** 
+# Task Management System
+
+Full-stack task management assessment project for Koncepthive.
+
+## Overview
+
+This repository contains a monorepo with:
+
+- A React + TypeScript frontend
+- A Node.js + Express + TypeScript backend
+- A PostgreSQL database schema and migration file
+
+The app supports:
+
+- Admin login and logout
+- Protected dashboard access
+- Task CRUD
+- Search, filtering, and sorting
+- Dashboard task summaries
+- Responsive layouts for desktop, tablet, and mobile
+
+## Tech Stack
+
+- Frontend: React, TypeScript, Vite
+- Backend: Node.js, Express, TypeScript
+- Database: PostgreSQL
+- Auth: JWT
+- Validation: Zod
+
+## Project Structure
+
+- `frontend/` - React app
+- `backend/` - Express API
+- `database/` - SQL migration files
+
+## Installation
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Copy the example environment file and fill in values if needed:
+
+   ```bash
+   Copy-Item .env.example .env
+   ```
+
+3. Create the PostgreSQL database and run the migration in `database/migrations/001_init.sql`.
+
+## Environment Variables
+
+Root `.env.example` contains:
+
+- `DATABASE_URL`
+- `JWT_SECRET`
+- `JWT_EXPIRES_IN`
+- `PORT`
+- `FRONTEND_URL`
+- `VITE_API_URL`
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
+
+## Database Setup
+
+The backend bootstraps the schema on startup and seeds the default admin user if it does not exist.
+
+The migration file is also included at:
+
+- `database/migrations/001_init.sql`
+
+## Running the Backend
+
+```bash
+npm run dev:backend
+```
+
+The API defaults to:
+
+- `http://localhost:4000`
+
+## Running the Frontend
+
+```bash
+npm run dev:frontend
+```
+
+To run both together:
+
+```bash
+npm run dev
+```
+
+The frontend defaults to:
+
+- `http://localhost:5173`
+
+## Default Login
+
+- Email: `admin@test.com`
+- Password: `123456`
+
+## API Documentation
+
+### Auth
+
+- `POST /api/auth/login`
+- `POST /api/auth/logout`
+- `GET /api/auth/me`
+
+### Tasks
+
+- `GET /api/tasks`
+- `GET /api/tasks/:id`
+- `POST /api/tasks`
+- `PUT /api/tasks/:id`
+- `DELETE /api/tasks/:id`
+
+Query params supported on `GET /api/tasks`:
+
+- `search`
+- `status`
+- `priority`
+- `sort` with `newest`, `oldest`, or `due_date`
+
+### Dashboard
+
+- `GET /api/dashboard/summary`
+
+### Health
+
+- `GET /api/health`
+
+## Assumptions
+
+- The project is a single-admin assessment, so registration is intentionally omitted.
+- The default admin account is automatically seeded.
+- JWT is used for authentication instead of sessions.
+- The repository is structured as a monorepo for simpler local development.
+
+## Known Limitations
+
+- No pagination yet.
+- No Docker setup.
+- No automated test suite included.
+- Refresh tokens are not implemented.
+
+## Commit History
+
+The repository was developed in phases:
+
+- Initial project setup
+- Authentication flow
+- Task management dashboard

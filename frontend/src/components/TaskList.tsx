@@ -1,4 +1,5 @@
 import type { Task } from "../types";
+import { formatDateLabel } from "../lib/date";
 
 type TaskListProps = {
   tasks: Task[];
@@ -6,14 +7,6 @@ type TaskListProps = {
   onEdit: (task: Task) => void;
   onDelete: (task: Task) => void;
 };
-
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat("en", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(value));
-}
 
 export function TaskList({ tasks, loading, onEdit, onDelete }: TaskListProps) {
   if (loading) {
@@ -71,8 +64,8 @@ export function TaskList({ tasks, loading, onEdit, onDelete }: TaskListProps) {
                 <td>
                   <span className={`pill status-${task.status}`}>{task.status}</span>
                 </td>
-                <td>{formatDate(task.dueDate)}</td>
-                <td>{formatDate(task.updatedAt)}</td>
+                <td>{formatDateLabel(task.dueDate)}</td>
+                <td>{formatDateLabel(task.updatedAt.slice(0, 10))}</td>
                 <td>
                   <div className="table-actions">
                     <button className="text-button" type="button" onClick={() => onEdit(task)}>
@@ -91,4 +84,3 @@ export function TaskList({ tasks, loading, onEdit, onDelete }: TaskListProps) {
     </section>
   );
 }
-

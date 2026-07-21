@@ -5,6 +5,7 @@ type TaskFormProps = {
   value: TaskInput;
   isEditing: boolean;
   submitting: boolean;
+  errors: Partial<Record<keyof TaskInput, string>>;
   onChange: (next: TaskInput) => void;
   onSubmit: () => void;
   onCancel: () => void;
@@ -14,6 +15,7 @@ export function TaskForm({
   value,
   isEditing,
   submitting,
+  errors,
   onChange,
   onSubmit,
   onCancel,
@@ -49,6 +51,7 @@ export function TaskForm({
           placeholder="Plan sprint review"
           required
         />
+        {errors.title ? <span className="field-error">{errors.title}</span> : null}
       </label>
 
       <label>
@@ -72,6 +75,7 @@ export function TaskForm({
             <option value="medium">Medium</option>
             <option value="high">High</option>
           </select>
+          {errors.priority ? <span className="field-error">{errors.priority}</span> : null}
         </label>
 
         <label>
@@ -84,6 +88,7 @@ export function TaskForm({
             <option value="in_progress">In Progress</option>
             <option value="completed">Completed</option>
           </select>
+          {errors.status ? <span className="field-error">{errors.status}</span> : null}
         </label>
       </div>
 
@@ -95,6 +100,7 @@ export function TaskForm({
           onChange={(event) => update("dueDate", event.target.value)}
           required
         />
+        {errors.dueDate ? <span className="field-error">{errors.dueDate}</span> : null}
       </label>
 
       <div className="task-form-actions">
@@ -105,4 +111,3 @@ export function TaskForm({
     </form>
   );
 }
-

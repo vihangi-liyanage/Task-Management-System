@@ -19,6 +19,7 @@ import type {
 import { SummaryCards } from "./SummaryCards";
 import { TaskForm } from "./TaskForm";
 import { TaskList } from "./TaskList";
+import { todayAsDateInput } from "../lib/date";
 
 type DashboardScreenProps = {
   token: string;
@@ -31,7 +32,7 @@ const emptyTask = (): TaskInput => ({
   description: "",
   priority: "medium",
   status: "pending",
-  dueDate: new Date().toISOString().slice(0, 10),
+  dueDate: todayAsDateInput(),
 });
 
 const defaultFilters: TaskFilters = {
@@ -55,17 +56,36 @@ export function DashboardScreen({ token, user, onLogout }: DashboardScreenProps)
   const [filters, setFilters] = useState<TaskFilters>(defaultFilters);
   const [draft, setDraft] = useState<TaskInput>(emptyTask);
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
+  const [formErrors, setFormErrors] = useState<Partial<Record<keyof TaskInput, string>>>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
   const isEditing = Boolean(editingTaskId);
+  const activeFilters = useMemo(() => filters, [filters]);
 
-  const activeFilters = useMemo(
-    () => filters,
-    [filters.search, filters.status, filters.priority, filters.sort],
-  );
+  function validateDraft(value: TaskInput) {
+    const nextErrors: Partial<Record<keyof TaskInput, string>> = {};
+    const today = todayAsDateInput();
+
+    if (!value.title.trim()) {
+      nextErrors.title = "Title is required.";
+    }
+    if (!value.priority) {
+      nextErrors.priority = "Priority is required.";
+    }
+    if (!value.status) {
+      nextErrors.status = "Status is required.";
+    }
+    if (!value.dueDate) {
+      nextErrors.dueDate = "Due date is required.";
+    } else if (value.dueDate < today) {
+      nextErrors.dueDate = "Due date cannot be earlier than today.";
+    }
+
+    return nextErrors;
+  }
 
   useEffect(() => {
     let active = true;
@@ -111,15 +131,25 @@ export function DashboardScreen({ token, user, onLogout }: DashboardScreenProps)
       status: task.status,
       dueDate: task.dueDate,
     });
+    setFormErrors({});
     setNotice("");
   }
 
   function resetForm() {
     setEditingTaskId(null);
     setDraft(emptyTask());
+    setFormErrors({});
   }
 
   async function saveTask() {
+    const nextErrors = validateDraft(draft);
+    setFormErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
+      setError("Please fix the highlighted task fields.");
+      return;
+    }
+
     setSaving(true);
     setError("");
     setNotice("");
@@ -264,6 +294,7 @@ export function DashboardScreen({ token, user, onLogout }: DashboardScreenProps)
           value={draft}
           isEditing={isEditing}
           submitting={saving}
+          errors={formErrors}
           onChange={setDraft}
           onSubmit={() => void saveTask()}
           onCancel={resetForm}
@@ -279,4 +310,3 @@ export function DashboardScreen({ token, user, onLogout }: DashboardScreenProps)
     </main>
   );
 }
-
