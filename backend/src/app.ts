@@ -1,7 +1,9 @@
 import cors from "cors";
 import express from "express";
 import { authRouter } from "./routes/auth.js";
+import { dashboardRouter } from "./routes/dashboard.js";
 import { healthRouter } from "./routes/health.js";
+import { tasksRouter } from "./routes/tasks.js";
 import { errorHandler, notFoundHandler } from "./middleware/error-handler.js";
 
 export function createApp() {
@@ -24,6 +26,8 @@ export function createApp() {
 
   app.use("/api/health", healthRouter);
   app.use("/api/auth", authRouter);
+  app.use("/api/tasks", tasksRouter);
+  app.use("/api/dashboard", dashboardRouter);
   app.use(notFoundHandler);
   app.use(errorHandler);
 

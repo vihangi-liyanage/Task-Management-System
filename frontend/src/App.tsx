@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { clearStoredToken, getStoredToken, setStoredToken } from "./lib/storage";
 import { fetchCurrentUser, login, logout } from "./lib/api";
 import type { AuthUser } from "./types";
+import { DashboardScreen } from "./components/DashboardScreen";
 
 export default function App() {
   const [token, setToken] = useState<string | null>(() => getStoredToken());
@@ -148,26 +149,6 @@ export default function App() {
   }
 
   return (
-    <main className="dashboard-shell">
-      <header className="topbar">
-        <div>
-          <p className="eyebrow">Authenticated session</p>
-          <h1>Welcome back, {user.name}</h1>
-          <p className="lead">{user.email}</p>
-        </div>
-        <button className="ghost-button" type="button" onClick={handleLogout}>
-          Logout
-        </button>
-      </header>
-
-      <section className="hero-card">
-        <p className="eyebrow">Phase 2 complete</p>
-        <h2>Auth flow and protected shell are working.</h2>
-        <p className="lead">
-          The next phase will connect task CRUD, dashboard summaries, search, filters, and sorting
-          to the backend APIs.
-        </p>
-      </section>
-    </main>
+    <DashboardScreen token={token} user={user} onLogout={handleLogout} />
   );
 }
