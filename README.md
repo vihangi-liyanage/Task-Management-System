@@ -171,7 +171,12 @@ Query parameters for `GET /api/tasks`:
 - No automated test suite yet.
 - Docker PostgreSQL is mapped to host port `5433` to avoid local port conflicts.
 
+## Docker Commands
 
+```powershell
+npm run docker:up
+npm run docker:down
+```
 
 Docker URLs:
 
