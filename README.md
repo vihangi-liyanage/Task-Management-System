@@ -178,16 +178,7 @@ npm run docker:up
 npm run docker:down
 ```
 
-Docker URLs:
 
-- Frontend: `http://localhost:3000`
-- Backend: `http://localhost:3001`
-- PostgreSQL: `localhost:5433`
-
-## Default Login
-
-- Email: `admin@test.com`
-- Password: `123456`
 
 
 
