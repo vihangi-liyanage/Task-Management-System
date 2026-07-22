@@ -184,6 +184,10 @@ Docker URLs:
 - Backend: `http://localhost:3001`
 - PostgreSQL: `localhost:5433`
 
+## Default Login
+
+- Email: `admin@test.com`
+- Password: `123456`
 
 
 
