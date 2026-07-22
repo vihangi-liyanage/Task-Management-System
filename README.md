@@ -189,13 +189,5 @@ Docker URLs:
 - Email: `admin@test.com`
 - Password: `123456`
 
-## Commit History
 
-The repository was developed in phases:
-
-- Initial project setup
-- Authentication flow
-- Task management dashboard
-- Docker support and theme toggle
-- Local run port alignment and task create fix
 
